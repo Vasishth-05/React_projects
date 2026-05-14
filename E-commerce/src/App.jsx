@@ -2,7 +2,14 @@ import ProductList from "./components/ProductList"
 import Navbar from './components/Navbar'
 import SearchBar from './components/SearchBar'
 import CategoryFilter from './components/CategoryFilter'
+import { useState } from "react"
 function App() {
+
+  const [cart,setCart] = useState([])
+
+  const handleAddToCart = (product) => {
+    setCart([...cart,product]);
+  }
 
   const products = [
     {id:1,title:"Pen",price:"10rs",image:null,category:"stationary"},
@@ -12,12 +19,12 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar/>
+    <div className="min-h-screen bg-gray-100">   
+      <Navbar cart={cart}/>
       <div class = 'px-6 py-4'>
         <SearchBar/>
         <CategoryFilter/>
-        <ProductList products={products}/>
+        <ProductList products={products} handleAddToCart={handleAddToCart}/>
       </div>
     </div>
   )
