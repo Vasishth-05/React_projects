@@ -30,10 +30,40 @@ function App() {
     return null;
   }
 
+  const handleMoveTask = (taskId,currentStatus) => {
+
+    const updatedTask = tasks.map((task) => {
+
+        if (task.id === taskId) {
+          let newStatus = currentStatus;
+
+        if(currentStatus === "todo") {
+          newStatus = "doing"
+        }
+
+        else if (currentStatus === "doing") {
+          newStatus = "done"
+        }
+
+        return {
+          ...task,
+          status : newStatus
+        }
+
+      }
+
+      return task;
+
+    });
+
+    setTasks(updatedTask);
+
+  }
+
   return (
     <>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Board tasks={tasks}/>
+      <Board tasks={tasks} handleAddTask={handleMoveTask} />
       <AddTaskModel isOpen={isOpen} setIsOpen={setIsOpen} handleAddTask={handleAddTask} />
     </>
   )

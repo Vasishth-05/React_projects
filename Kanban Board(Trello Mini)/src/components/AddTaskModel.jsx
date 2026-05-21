@@ -4,9 +4,7 @@ function AddTaskModel({isOpen,setIsOpen,handleAddTask}){
 
     const [taskTitle,setTaskTitle] = useState("");
 
-    if(!isOpen){
-        return null;
-    }
+    if (isOpen === false) return null
 
     return <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
         <div className="bg-white p-6 rounded-xl w-96">
@@ -23,7 +21,8 @@ function AddTaskModel({isOpen,setIsOpen,handleAddTask}){
                             title: taskTitle,
                             status:"todo"
                         }
-                        handleAddTask(newTask)
+                        handleAddTask(newTask);
+                        setTaskTitle("");
                 }}>Add</button>
                 <button className="bg-gray-200 px-4 py-2 rounded-lg flex-1" onClick={() => setIsOpen(false)}>Close</button>
             </div>
