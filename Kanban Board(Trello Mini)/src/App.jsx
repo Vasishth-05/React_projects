@@ -19,7 +19,7 @@ function App() {
     },
     {
       id:3,
-      title:"Deploy App",
+      title:"Deploy Apps",
       status:"done"
     }
   ])
