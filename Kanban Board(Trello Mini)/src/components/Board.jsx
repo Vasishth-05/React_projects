@@ -1,6 +1,6 @@
 import Column from "./Column";
 
-function Board({ tasks , handleMoveTask }) {
+function Board({ tasks , handleMoveTask , handleDeleteTask}) {
 
     const todoTasks = tasks.filter(task => task.status === "todo");
     const doingTasks = tasks.filter(task => task.status === "doing");
@@ -12,19 +12,22 @@ function Board({ tasks , handleMoveTask }) {
             <Column
                 title="Todo"
                 tasks={todoTasks}
-                handle={handleMoveTask}
+                handleMoveTask={handleMoveTask}
+                handleDeleteTask={handleDeleteTask}
             />
 
             <Column
                 title="Doing"
                 tasks={doingTasks}
-                handle={handleMoveTask}
+                handleMoveTask={handleMoveTask}
+                handleDeleteTask={handleDeleteTask}
             />
 
             <Column
                 title="Done"
                 tasks={doneTasks}
-                handle={handleMoveTask}
+                handleMoveTask={handleMoveTask}
+                handleDeleteTask={handleDeleteTask}
             />
 
         </div>

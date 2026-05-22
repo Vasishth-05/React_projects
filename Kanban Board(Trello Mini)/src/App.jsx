@@ -6,23 +6,8 @@ import Header from './components/Header'
 
 function App() {
 
-  const [tasks,setTasks] = useState([
-    {
-      id:1,
-      title:"Learn React",
-      status:"todo"
-    },
-    {
-      id:2,
-      title:"Build Project",
-      status:"doing"
-    },
-    {
-      id:3,
-      title:"Deploy Apps",
-      status:"done"
-    }
-  ])
+  const [tasks,setTasks] = useState([]);
+
   const [isOpen,setIsOpen] = useState(false);
 
   function handleAddTask(newTask){
@@ -60,10 +45,20 @@ function App() {
 
   }
 
+  const handleDeleteTask = (taskId) => {
+
+    const updatedTasks = tasks.filter(
+      (task) => task.id !== taskId
+    )
+
+    setTasks(updatedTasks)
+
+  }
+
   return (
     <>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Board tasks={tasks} handleAddTask={handleMoveTask} />
+      <Board tasks={tasks} handleAddTask={handleMoveTask} handleMoveTask={handleMoveTask} handleDeleteTask={handleDeleteTask} />
       <AddTaskModel isOpen={isOpen} setIsOpen={setIsOpen} handleAddTask={handleAddTask} />
     </>
   )
