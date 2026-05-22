@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import AddTaskModel from './components/AddTaskModel'
 import Board from './components/Board'
@@ -6,13 +6,18 @@ import Header from './components/Header'
 
 function App() {
 
-  const [tasks,setTasks] = useState([]);
+  const [tasks,setTasks] = useState(() => {
+
+    const savedTasks = localStorage.getItem("tasks");
+
+    return savedTasks ? JSON.parse(savedTasks) : [];
+
+  });
 
   const [isOpen,setIsOpen] = useState(false);
 
   function handleAddTask(newTask){
     setTasks([...tasks,newTask]);
-    return null;
   }
 
   const handleMoveTask = (taskId,currentStatus) => {
@@ -55,10 +60,15 @@ function App() {
 
   }
 
+  useEffect(() => {
+    localStorage.setItem( "tasks", JSON.stringify(tasks))
+  } , [tasks])
+
+  
   return (
     <>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Board tasks={tasks} handleAddTask={handleMoveTask} handleMoveTask={handleMoveTask} handleDeleteTask={handleDeleteTask} />
+      <Board tasks={tasks} handleAddTask={handleAddTask} handleMoveTask={handleMoveTask} handleDeleteTask={handleDeleteTask} />
       <AddTaskModel isOpen={isOpen} setIsOpen={setIsOpen} handleAddTask={handleAddTask} />
     </>
   )
