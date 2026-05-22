@@ -20,6 +20,34 @@ function App() {
     setTasks([...tasks,newTask]);
   }
 
+  const handleMoveBackTask = (taskId,currentStatus) => {
+     const updatedTask = tasks.map((task) => {
+
+        if (task.id === taskId) {
+          let newStatus = currentStatus;
+
+        if(currentStatus === "done") {
+          newStatus = "doing"
+        }
+
+        else if (currentStatus === "doing") {
+          newStatus = "todo"
+        }
+
+        return {
+          ...task,
+          status : newStatus
+        }
+
+      }
+
+      return task;
+
+    });
+
+    setTasks(updatedTask);
+  }
+
   const handleMoveTask = (taskId,currentStatus) => {
 
     const updatedTask = tasks.map((task) => {
@@ -64,11 +92,11 @@ function App() {
     localStorage.setItem( "tasks", JSON.stringify(tasks))
   } , [tasks])
 
-  
+
   return (
     <>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Board tasks={tasks} handleAddTask={handleAddTask} handleMoveTask={handleMoveTask} handleDeleteTask={handleDeleteTask} />
+      <Board tasks={tasks} handleAddTask={handleAddTask} handleMoveTask={handleMoveTask} handleDeleteTask={handleDeleteTask} handleMoveBackTask={handleMoveBackTask} />
       <AddTaskModel isOpen={isOpen} setIsOpen={setIsOpen} handleAddTask={handleAddTask} />
     </>
   )
